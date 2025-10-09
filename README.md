@@ -2647,10 +2647,10 @@ If you’re interested in helping improve this plugin, please take a moment to r
 [npm-url]: https://npmjs.com/package/image-minimizer-webpack-plugin
 [node]: https://img.shields.io/node/v/image-minimizer-webpack-plugin.svg
 [node-url]: https://nodejs.org
-[tests]: https://github.com/webpack-contrib/image-minimizer-webpack-plugin/workflows/image-minimizer-webpack-plugin/badge.svg
-[tests-url]: https://github.com/webpack-contrib/image-minimizer-webpack-plugin/actions
-[cover]: https://codecov.io/gh/webpack-contrib/image-minimizer-webpack-plugin/branch/master/graph/badge.svg
-[cover-url]: https://codecov.io/gh/webpack-contrib/image-minimizer-webpack-plugin
+[tests]: https://github.com/webpack/image-minimizer-webpack-plugin/workflows/image-minimizer-webpack-plugin/badge.svg
+[tests-url]: https://github.com/webpack/image-minimizer-webpack-plugin/actions
+[cover]: https://codecov.io/gh/webpack/image-minimizer-webpack-plugin/branch/main/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack/image-minimizer-webpack-plugin
 [discussion]: https://img.shields.io/github/discussions/webpack/webpack
 [discussion-url]: https://github.com/webpack/webpack/discussions
 [size]: https://packagephobia.now.sh/badge?p=image-minimizer-webpack-plugin

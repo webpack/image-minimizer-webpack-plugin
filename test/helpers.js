@@ -400,7 +400,7 @@ function needSquooshTest() {
   const needTest = typeof process.env.SQUOOSH_TEST !== "undefined";
 
   // Disable tests for all and Nodejs > 16
-  // see: https://github.com/webpack-contrib/image-minimizer-webpack-plugin/pull/345
+  // see: https://github.com/webpack/image-minimizer-webpack-plugin/pull/345
   return needTest;
 }
 
