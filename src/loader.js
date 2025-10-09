@@ -30,7 +30,7 @@ const worker = require("./worker");
  * @property {Generator<T>[]=} generator generator configuration
  */
 
-// Workaround - https://github.com/webpack-contrib/image-minimizer-webpack-plugin/issues/341
+// Workaround - https://github.com/webpack/image-minimizer-webpack-plugin/issues/341
 /**
  * @template T
  * @param {import("webpack").LoaderContext<LoaderOptions<T>>} loaderContext loader context

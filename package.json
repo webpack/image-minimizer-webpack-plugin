@@ -12,9 +12,9 @@
     "compress",
     "optimize"
   ],
-  "homepage": "https://github.com/webpack-contrib/image-minimizer-webpack-plugin",
-  "bugs": "https://github.com/webpack-contrib/image-minimizer-webpack-plugin/issues",
-  "repository": "webpack-contrib/image-minimizer-webpack-plugin",
+  "homepage": "https://github.com/webpack/image-minimizer-webpack-plugin",
+  "bugs": "https://github.com/webpack/image-minimizer-webpack-plugin/issues",
+  "repository": "webpack/image-minimizer-webpack-plugin",
   "funding": {
     "type": "opencollective",
     "url": "https://opencollective.com/webpack"
@@ -34,7 +34,7 @@
     "build:types": "tsc --declaration --emitDeclarationOnly && prettier \"types/**/*.ts\" --write",
     "build:code": "cross-env NODE_ENV=production babel src -d dist --copy-files",
     "build": "npm-run-all -p \"build:**\"",
-    "commitlint": "commitlint --from=master",
+    "commitlint": "commitlint --from=main",
     "security": "npm audit --production",
     "lint:prettier": "prettier --cache --list-different .",
     "lint:code": "eslint --cache .",

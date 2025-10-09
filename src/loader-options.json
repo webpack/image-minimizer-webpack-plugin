@@ -79,7 +79,7 @@
   "properties": {
     "minimizer": {
       "description": "Allows you to setup the minimizer function and options.",
-      "link": "https://github.com/webpack-contrib/image-minimizer-webpack-plugin#minimizer",
+      "link": "https://github.com/webpack/image-minimizer-webpack-plugin#minimizer",
       "anyOf": [
         {
           "type": "array",
@@ -95,7 +95,7 @@
     },
     "generator": {
       "description": "Allows you to setup the generator function and options.",
-      "link": "https://github.com/webpack-contrib/image-minimizer-webpack-plugin#generator",
+      "link": "https://github.com/webpack/image-minimizer-webpack-plugin#generator",
       "type": "array",
       "minItems": 1,
       "items": {
@@ -104,7 +104,7 @@
     },
     "severityError": {
       "description": "Allows to choose how errors are displayed.",
-      "link": "https://github.com/webpack-contrib/image-minimizer-webpack-plugin#severityerror",
+      "link": "https://github.com/webpack/image-minimizer-webpack-plugin#severityerror",
       "enum": ["off", "warning", "error"]
     }
   }
