@@ -180,7 +180,7 @@ module.exports = {
           implementation: ImageMinimizerPlugin.imageminMinify,
           options: {
             // Lossless optimization with custom option
-            // Feel free to experiment with options for better results
+            // Feel free to experiment with options for better results!
             plugins: [
               ["gifsicle", { interlaced: true }],
               ["jpegtran", { progressive: true }],
