@@ -2637,7 +2637,7 @@ module.exports = {
 We welcome contributions!
 If you’re interested in helping improve this plugin, please take a moment to read our contributing guidelines.
 
-[CONTRIBUTING](./.github/CONTRIBUTING.md)
+[CONTRIBUTING](https://github.com/webpack/image-minimizer-webpack-plugin?tab=contributing-ov-file#contributing)
 
 ## License
 
