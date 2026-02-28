@@ -99,7 +99,7 @@
     "imagemin-gifsicle": "^7.0.0",
     "imagemin-mozjpeg": "^10.0.0",
     "imagemin-pngquant": "^10.0.0",
-    "imagemin-svgo": "^11.0.1",
+    "imagemin-svgo": "^12.0.0",
     "imagemin-webp": "^8.0.0",
     "jest": "^30.0.0",
     "lint-staged": "^15.2.8",
