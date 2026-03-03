@@ -2,12 +2,10 @@ const path = require("node:path");
 
 /** @typedef {import("./index").WorkerResult} WorkerResult */
 /** @typedef {import("./index").CustomOptions} CustomOptions */
+/** @typedef {import("./index").EXPECTED_ANY} EXPECTED_ANY */
 /** @typedef {import("webpack").WebpackError} WebpackError */
 /** @typedef {import("webpack").Module} Module */
 /** @typedef {import("webpack").AssetInfo} AssetInfo */
-
-// eslint-disable-next-line jsdoc/no-restricted-syntax
-/** @typedef {any} EXPECTED_ANY */
 
 /**
  * @template T
@@ -127,7 +125,7 @@ const stringToBytes = (string) =>
 
 /**
  * @param {ArrayBuffer | ArrayLike<number>} input input buffer
- * @returns {{ext: string, mime: string} | undefined} file type info
+ * @returns {{ ext: string, mime: string } | undefined} file type info
  */
 function fileTypeFromBuffer(input) {
   if (
@@ -150,7 +148,7 @@ function fileTypeFromBuffer(input) {
 
   /**
    * @param {number[]} header header bytes
-   * @param {{offset: number, mask?: number[]}=} options options
+   * @param {{ offset: number, mask?: number[] }=} options options
    * @returns {boolean} whether the header matches
    */
   const check = (header, options) => {
@@ -174,7 +172,7 @@ function fileTypeFromBuffer(input) {
 
   /**
    * @param {string} header header string
-   * @param {{offset: number, mask?: number[]}=} options options
+   * @param {{ offset: number, mask?: number[] }=} options options
    * @returns {boolean} whether the header matches
    */
   const checkString = (header, options) =>
@@ -492,8 +490,8 @@ function memoize(fn) {
 
 /**
  * @typedef {object} MetaData
- * @property {Array<Error>} warnings warnings
- * @property {Array<Error>} errors errors
+ * @property {Error[]} warnings warnings
+ * @property {Error[]} errors errors
  */
 
 class InvalidConfigError extends Error {
@@ -718,8 +716,8 @@ async function imageminMinify(original, options) {
  * @typedef {object} SquooshImage
  * @property {(options: Record<string, unknown>) => Promise<void>} preprocess preprocess
  * @property {(options: Record<string, unknown>) => Promise<void>} encode encode
- * @property {Record<string, {binary: Uint8Array, extension: string}>} encodedWith encoded with
- * @property {{ bitmap: {width: number, height: number}} } decoded decoded
+ * @property {Record<string, { binary: Uint8Array, extension: string }>} encodedWith encoded with
+ * @property {{ bitmap: { width: number, height: number } }} decoded decoded
  */
 
 /**
@@ -788,9 +786,8 @@ async function squooshImagePoolTeardown() {
  * @returns {Promise<WorkerResult | null>} generated result
  */
 async function squooshGenerate(original, options) {
-  // eslint-disable-next-line jsdoc/no-restricted-syntax
   /**
-   * @typedef {{ [key: string]: any }} SquooshOptions
+   * @typedef {{ [key: string]: EXPECTED_ANY }} SquooshOptions
    */
 
   const squoosh = require("@squoosh/lib");
@@ -886,9 +883,8 @@ squooshGenerate.teardown = squooshImagePoolTeardown;
  * @returns {Promise<WorkerResult | null>} minified result
  */
 async function squooshMinify(original, options) {
-  // eslint-disable-next-line jsdoc/no-restricted-syntax
   /**
-   * @typedef {{ [key: string]: any }} SquooshOptions
+   * @typedef {{ [key: string]: EXPECTED_ANY }} SquooshOptions
    */
 
   const squoosh = require("@squoosh/lib");
@@ -1194,7 +1190,7 @@ function sharpGenerate(original, options) {
   /**
    * @typedef {object} SharpOptions
    * @property {ResizeOptions=} resize resize options
-   * @property {number | 'auto'=} rotate rotate options
+   * @property {number | "auto"=} rotate rotate options
    * @property {SizeSuffix=} sizeSuffix size suffix
    * @property {SharpEncodeOptions=} encodeOptions encode options
    */
