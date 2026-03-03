@@ -32,6 +32,9 @@ const worker = require("./worker");
 /** @typedef {import("./utils.js").imageminMinify} ImageminMinifyFunction */
 /** @typedef {import("./utils.js").squooshMinify} SquooshMinifyFunction */
 
+// eslint-disable-next-line jsdoc/reject-any-type
+/** @typedef {any} EXPECTED_ANY */
+
 /** @typedef {RegExp | string} Rule */
 /** @typedef {Rule[] | Rule} Rules */
 
@@ -48,8 +51,8 @@ const worker = require("./worker");
  * @typedef {object} WorkerResult
  * @property {string} filename filename
  * @property {Buffer} data data buffer
- * @property {Array<Error>} warnings warnings
- * @property {Array<Error>} errors errors
+ * @property {Error[]} warnings warnings
+ * @property {Error[]} errors errors
  * @property {AssetInfo & { [worker.isFilenameProcessed]?: boolean }} info asset info
  */
 
@@ -64,9 +67,8 @@ const worker = require("./worker");
  * @property {Transformer<T> | Transformer<T>[]} transformer transformer
  */
 
-// eslint-disable-next-line jsdoc/no-restricted-syntax
 /**
- * @typedef {{ [key: string]: any }} CustomOptions
+ * @typedef {{ [key: string]: EXPECTED_ANY }} CustomOptions
  */
 
 /**
@@ -156,8 +158,8 @@ const worker = require("./worker");
  * @property {Rule=} test test to match files against
  * @property {Rule=} include files to include
  * @property {Rule=} exclude files to exclude
- * @property {T extends any[] ? { [P in keyof T]: Minimizer<T[P]> } : Minimizer<T> | Minimizer<T>[]=} minimizer allows to set the minimizer
- * @property {G extends any[] ? { [P in keyof G]: Generator<G[P]> } : Generator<G>[]=} generator allows to set the generator
+ * @property {T extends EXPECTED_ANY[] ? { [P in keyof T]: Minimizer<T[P]> } : Minimizer<T> | Minimizer<T>[]=} minimizer allows to set the minimizer
+ * @property {G extends EXPECTED_ANY[] ? { [P in keyof G]: Generator<G[P]> } : Generator<G>[]=} generator allows to set the generator
  * @property {boolean=} loader automatically adding `image-loader`.
  * @property {number=} concurrency maximum number of concurrency optimization processes in one time
  * @property {string=} severityError allows to choose how errors are displayed
@@ -267,7 +269,7 @@ class ImageMinimizerPlugin {
 
             /**
              * @template Z
-             * @param {Transformer<Z> | Array<Transformer<Z>>} transformer transformer
+             * @param {Transformer<Z> | Transformer<Z>[]} transformer transformer
              * @returns {Promise<Task<Z>>} generated task
              */
             const getFromCache = async (transformer) => {
@@ -318,10 +320,8 @@ class ImageMinimizerPlugin {
     const limit = Math.max(
       1,
       this.options.concurrency ||
-        // eslint-disable-next-line n/no-unsupported-features/node-builtins
         (typeof os.availableParallelism === "function"
           ? {
-              // eslint-disable-next-line n/no-unsupported-features/node-builtins
               length: os.availableParallelism(),
             }
           : os.cpus() || {
@@ -511,7 +511,7 @@ class ImageMinimizerPlugin {
 
           generatorForLoader =
             importGenerators.length > 0
-              ? /** @type {G extends any[] ? { [P in keyof G]: Generator<G[P]>; } : Generator<G>[]} */
+              ? /** @type {G extends EXPECTED_ANY[] ? { [P in keyof G]: Generator<G[P]> } : Generator<G>[]} */
                 (importGenerators)
               : undefined;
         }

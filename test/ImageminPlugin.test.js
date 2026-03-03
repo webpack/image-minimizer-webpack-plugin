@@ -1150,6 +1150,7 @@ describe("imagemin plugin", () => {
   });
 
   it("should throw an error on empty minimizer", async () => {
+    // eslint-disable-next-line jest/no-unneeded-async-expect-function
     await expect(async () => {
       await runWebpack({
         emitPlugin: true,
@@ -1161,6 +1162,7 @@ describe("imagemin plugin", () => {
   });
 
   it("should throw an error on empty generator", async () => {
+    // eslint-disable-next-line jest/no-unneeded-async-expect-function
     await expect(async () => {
       await runWebpack({
         emitPlugin: true,
