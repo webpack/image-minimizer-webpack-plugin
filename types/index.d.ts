@@ -56,6 +56,7 @@ declare namespace ImageMinimizerPlugin {
     PathData,
     ImageminMinifyFunction,
     SquooshMinifyFunction,
+    EXPECTED_ANY,
     Rule,
     Rules,
     FilterFn,
@@ -99,6 +100,7 @@ type TemplatePath = import("webpack").TemplatePath;
 type PathData = import("webpack").PathData;
 type ImageminMinifyFunction = typeof imageminMinify;
 type SquooshMinifyFunction = typeof squooshMinify;
+type EXPECTED_ANY = any;
 type Rule = RegExp | string;
 type Rules = Rule[] | Rule;
 type FilterFn = (source: Buffer, sourcePath: string) => boolean;
@@ -115,11 +117,11 @@ type WorkerResult = {
   /**
    * warnings
    */
-  warnings: Array<Error>;
+  warnings: Error[];
   /**
    * errors
    */
-  errors: Array<Error>;
+  errors: Error[];
   /**
    * asset info
    */
@@ -158,7 +160,7 @@ type Task<T> = {
   transformer: Transformer<T> | Transformer<T>[];
 };
 type CustomOptions = {
-  [key: string]: any;
+  [key: string]: EXPECTED_ANY;
 };
 type InferDefaultType<T> = T extends infer U ? U : CustomOptions;
 type BasicTransformerOptions<T> = InferDefaultType<T> | undefined;
@@ -272,7 +274,7 @@ type PluginOptions<T, G> = {
    * allows to set the minimizer
    */
   minimizer?:
-    | (T extends any[]
+    | (T extends EXPECTED_ANY[]
         ? { [P in keyof T]: Minimizer<T[P]> }
         : Minimizer<T> | Minimizer<T>[])
     | undefined;
@@ -280,7 +282,9 @@ type PluginOptions<T, G> = {
    * allows to set the generator
    */
   generator?:
-    | (G extends any[] ? { [P in keyof G]: Generator<G[P]> } : Generator<G>[])
+    | (G extends EXPECTED_ANY[]
+        ? { [P in keyof G]: Generator<G[P]> }
+        : Generator<G>[])
     | undefined;
   /**
    * automatically adding `image-loader`.

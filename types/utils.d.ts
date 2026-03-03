@@ -1,9 +1,9 @@
 export type WorkerResult = import("./index").WorkerResult;
 export type CustomOptions = import("./index").CustomOptions;
+export type EXPECTED_ANY = import("./index").EXPECTED_ANY;
 export type WebpackError = import("webpack").WebpackError;
 export type Module = import("webpack").Module;
 export type AssetInfo = import("webpack").AssetInfo;
-export type EXPECTED_ANY = any;
 export type Task<T> = () => Promise<T>;
 export type FunctionReturning<T> = () => T;
 export type CustomSharpFormat = EXPECTED_ANY;
@@ -17,11 +17,11 @@ export type MetaData = {
   /**
    * warnings
    */
-  warnings: Array<Error>;
+  warnings: Error[];
   /**
    * errors
    */
-  errors: Array<Error>;
+  errors: Error[];
 };
 export type SquooshImage = {
   /**
@@ -109,10 +109,10 @@ export function isAbsoluteURL(url: string): boolean;
 export function memoize<T>(fn: FunctionReturning<T>): FunctionReturning<T>;
 /** @typedef {import("./index").WorkerResult} WorkerResult */
 /** @typedef {import("./index").CustomOptions} CustomOptions */
+/** @typedef {import("./index").EXPECTED_ANY} EXPECTED_ANY */
 /** @typedef {import("webpack").WebpackError} WebpackError */
 /** @typedef {import("webpack").Module} Module */
 /** @typedef {import("webpack").AssetInfo} AssetInfo */
-/** @typedef {any} EXPECTED_ANY */
 /**
  * @template T
  * @typedef {() => Promise<T>} Task

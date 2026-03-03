@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`validate loader options should throw an error on the "generator" option with "[]" value 1`] = `
 "Invalid options object. Image Minimizer Plugin Loader has been initialized using an options object that does not match the API schema.
