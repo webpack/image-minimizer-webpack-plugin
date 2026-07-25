@@ -99,7 +99,7 @@
     "prettier": "^3.3.2",
     "remark-cli": "^12.0.1",
     "remark-preset-lint-itgalaxy": "^16.0.0",
-    "sharp": "^0.34.3",
+    "sharp": "^0.35.0",
     "standard-version": "^9.5.0",
     "svgo": "^4.0.0",
     "tempy": "^3.1.0",
