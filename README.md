@@ -2658,7 +2658,7 @@ options line up like this:
 | `minimizer.options`                | `minimizerOptions`                                |
 | `minimizer.filter`                 | a `filter` on the minimizer itself                |
 | `generator[].implementation`       | `generate`                                        |
-| `generator[].options`              | `generatorOptions`, keyed by preset               |
+| `generator[].options`              | `options` on that generator                       |
 | `generator[].preset`               | the key the generator is written under            |
 | `generator[].type`                 | `type` on that generator                          |
 | `generator[].filename` / `.filter` | `filename` / `filter` on that generator           |
@@ -2714,9 +2714,9 @@ module.exports = {
         webp: {
           type: "asset",
           implementation: MinimizerPlugin.sharpGenerate,
+          options: { encodeOptions: { webp: { quality: 90 } } },
         },
       },
-      generatorOptions: { webp: { encodeOptions: { webp: { quality: 90 } } } },
     }),
   ],
 };
