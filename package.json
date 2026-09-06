@@ -56,7 +56,8 @@
     "sharp": "$sharp",
     "imagemin-avif": {
       "sharp": "$sharp"
-    }
+    },
+    "fast-uri": "^3.1.7"
   },
   "dependencies": {
     "schema-utils": "^4.2.0",

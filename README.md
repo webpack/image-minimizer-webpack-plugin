@@ -22,6 +22,19 @@
 
 # image-minimizer-webpack-plugin
 
+> [!IMPORTANT]
+>
+> **This plugin is deprecated.** Its work continues in
+> [`minimizer-webpack-plugin`](https://github.com/webpack/minimizer-webpack-plugin),
+> which minimizes and generates every asset type — JavaScript, CSS, HTML, JSON
+> and images — so one plugin covers a build instead of two. It is maintained by
+> the same people, and the minimizers and generators here keep their names
+> there.
+>
+> This plugin still works and still gets security fixes, but new features land
+> in `minimizer-webpack-plugin` only. See
+> [Migrating to `minimizer-webpack-plugin`](#migrating-to-minimizer-webpack-plugin).
+
 <!--
 This Table of Contents was generated using the VS Code extension [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
 with option `"markdown.extension.toc.levels": "2..6"`
@@ -82,6 +95,7 @@ with option `"markdown.extension.toc.levels": "2..6"`
   - [Optimize images based on size](#optimize-images-based-on-size)
   - [Optimize and generate `webp` images](#optimize-and-generate-webp-images)
   - [Generate `webp` images from copied assets](#generate-webp-images-from-copied-assets)
+- [Migrating to `minimizer-webpack-plugin`](#migrating-to-minimizer-webpack-plugin)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -2631,6 +2645,92 @@ module.exports = {
   plugins: [new CopyPlugin({ patterns: ["images/**/*.png"] })],
 };
 ```
+
+## Migrating to `minimizer-webpack-plugin`
+
+[`minimizer-webpack-plugin`](https://github.com/webpack/minimizer-webpack-plugin)
+does what this plugin does, for every asset type rather than images alone. The
+options line up like this:
+
+| here                               | `minimizer-webpack-plugin`                        |
+| ---------------------------------- | ------------------------------------------------- |
+| `minimizer.implementation`         | `minify`                                          |
+| `minimizer.options`                | `minimizerOptions`                                |
+| `minimizer.filter`                 | a `filter` on the minimizer itself                |
+| `generator[].implementation`       | `generate`                                        |
+| `generator[].options`              | `options` on that generator                       |
+| `generator[].preset`               | the key the generator is written under            |
+| `generator[].type`                 | `type` on that generator                          |
+| `generator[].filename` / `.filter` | `filename` / `filter` on that generator           |
+| `deleteOriginalAssets`             | `deleteOriginalAssets` on that generator          |
+| `concurrency`                      | `parallel`                                        |
+| `test` / `include` / `exclude`     | unchanged                                         |
+| `loader`                           | nothing — `generate` reaches a module without one |
+| `severityError`                    | nothing — a failed minimizer is an error          |
+
+`imageminMinify`, `imageminGenerate`, `imageminNormalizeConfig`, `sharpMinify`,
+`sharpGenerate` and `svgoMinify` keep their names, so only the plugin they are
+read off changes. `squooshMinify` and `squooshGenerate` are not carried over —
+`@squoosh/lib` is unmaintained, and both are already deprecated here.
+
+Two shapes changed rather than moved. Generators are **named** there instead of
+listed, because the name is what `?as=` asks for, so an array of two generators
+becomes an object of two entries. And `type: "asset"` — the default here — has
+to be written out there, where the default instead re-encodes the module itself
+so that the import can be renamed with it.
+
+**Before**
+
+```js
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+
+module.exports = {
+  plugins: [
+    new ImageMinimizerPlugin({
+      test: /\.(jpe?g|png)$/i,
+      generator: [
+        {
+          type: "asset",
+          preset: "webp",
+          implementation: ImageMinimizerPlugin.sharpGenerate,
+          options: { encodeOptions: { webp: { quality: 90 } } },
+        },
+      ],
+    }),
+  ],
+};
+```
+
+**After**
+
+```js
+const MinimizerPlugin = require("minimizer-webpack-plugin");
+
+module.exports = {
+  plugins: [
+    new MinimizerPlugin({
+      test: /\.(jpe?g|png)$/i,
+      generate: {
+        webp: {
+          type: "asset",
+          implementation: MinimizerPlugin.sharpGenerate,
+          options: { encodeOptions: { webp: { quality: 90 } } },
+        },
+      },
+    }),
+  ],
+};
+```
+
+> [!NOTE]
+>
+> Named generators and `type: "asset"` are newer than
+> `minimizer-webpack-plugin` 5.9.0 — check its
+> [README](https://github.com/webpack/minimizer-webpack-plugin#generate) for
+> what the version you install supports. A generator left at the default
+> `type: "import"` additionally needs a webpack whose `NormalModule`
+> `processResult` hook can be awaited, since that is where a rename has to
+> happen.
 
 ## Contributing
 
